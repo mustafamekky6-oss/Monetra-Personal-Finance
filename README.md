@@ -221,5 +221,6 @@ The following are **ideas under consideration, not implemented features**:
 
 **Mustafa Mekky**
 GitHub: [@mustafamekky6-oss](https://github.com/mustafamekky6-oss)
+Live demo: [monetra12.vercel.app](https://monetra12.vercel.app/)
 
 <!-- VERIFY: confirm the display name above, and add a live-demo link or license section if applicable. -->

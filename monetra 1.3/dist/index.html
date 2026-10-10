@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Monetra — Personal Finance Intelligence. A local-first demo for understanding spending, budgets, recurring expenses, goals and future scenarios." />
+    <meta name="theme-color" content="#0f1011" />
+    <title>Monetra — Personal Finance Intelligence</title>
+    <script type="module" crossorigin src="/assets/index-CL69BKto.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/recharts-1QzBSows.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-Cj4d2QE8.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Apply the persisted theme before first paint to avoid a flash.
+      try {
+        var raw = localStorage.getItem('monetra.data.v1');
+        if (raw && JSON.parse(raw).preferences?.theme === 'light') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) {}
+    </script>
+  </body>
+</html>

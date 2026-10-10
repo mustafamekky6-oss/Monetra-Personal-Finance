@@ -1,0 +1,262 @@
+@import 'tailwindcss';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/dm-serif-display/400.css';
+@import '@fontsource/roboto-mono/400.css';
+@import '@fontsource/roboto-mono/500.css';
+
+/* ------------------------------------------------------------------ *
+ * Theme engine
+ *
+ * Semantic surface/text tokens resolve to runtime CSS variables, so the
+ * whole interface flips between the dark "quiet wealth" gallery (default,
+ * per design.md) and a light gallery counterpart by toggling `html.light`.
+ * ------------------------------------------------------------------ */
+
+:root {
+  /* Dark (default) — Origin Financial palette */
+  --surface-canvas: #0f1011;
+  --surface-inset: #090a0b;
+  --surface-card: #2e2e2e;
+  --surface-hover: #3f4041;
+  --surface-field: #000000;
+  --surface-inverted: #cacaca;
+  --on-inverted: #000000;
+  --lift: #ffffff; /* overlay color used with /N opacity modifiers */
+  --scrim: rgba(0, 0, 0, 0.8);
+  --text-heading: #f5f5f7;
+  --text-body: #9f9fa0;
+  --text-muted: #6a6b6b;
+  --action: #ffffff; /* primary action fill */
+  --on-action: #000000;
+  --accent-income: #00b3dd;
+  --accent-expense: #dd90d8;
+  --accent-warn: #d1c9ff;
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-tick: #6a6b6b;
+  --chart-tooltip: #090a0b;
+  --chart-tooltip-border: rgba(255, 255, 255, 0.12);
+  --range-track: #3f4041;
+  --range-thumb: #f5f5f7;
+  --focus-ring: #00b3dd;
+  --scroll-thumb: #3f4041;
+  --selection: rgba(132, 125, 255, 0.35);
+}
+
+html.light {
+  /* Light gallery — the inverse: pale canvas, white cards, dark spotlight */
+  --surface-canvas: #f5f5f7;
+  --surface-inset: #ebecf0;
+  --surface-card: #ffffff;
+  --surface-hover: #e3e4ea;
+  --surface-field: #ffffff;
+  --surface-inverted: #0f1011;
+  --on-inverted: #f5f5f7;
+  --lift: #0f1011;
+  --scrim: rgba(9, 10, 11, 0.45);
+  --text-heading: #0f1011;
+  --text-body: #4a4a52;
+  --text-muted: #85858e;
+  --action: #0f1011;
+  --on-action: #ffffff;
+  --accent-income: #00789c;
+  --accent-expense: #a4449f;
+  --accent-warn: #6b5fc0;
+  --chart-grid: rgba(15, 16, 17, 0.08);
+  --chart-tick: #85858e;
+  --chart-tooltip: #ffffff;
+  --chart-tooltip-border: rgba(15, 16, 17, 0.12);
+  --range-track: #d9dae0;
+  --range-thumb: #0f1011;
+  --focus-ring: #00789c;
+  --scroll-thumb: #c9cad1;
+  --selection: rgba(132, 125, 255, 0.25);
+}
+
+/* Semantic tokens exposed to Tailwind utilities (inline → var() refs) */
+@theme inline {
+  --color-canvas: var(--surface-canvas);
+  --color-inset: var(--surface-inset);
+  --color-card: var(--surface-card);
+  --color-hover-surface: var(--surface-hover);
+  --color-field: var(--surface-field);
+  --color-inverted: var(--surface-inverted);
+  --color-on-inverted: var(--on-inverted);
+  --color-lift: var(--lift);
+  --color-scrim: var(--scrim);
+  --color-heading: var(--text-heading);
+  --color-body: var(--text-body);
+  --color-muted: var(--text-muted);
+  --color-action: var(--action);
+  --color-on-action: var(--on-action);
+  --color-income: var(--accent-income);
+  --color-expense: var(--accent-expense);
+  --color-warn: var(--accent-warn);
+}
+
+/* Origin Financial raw palette — still available where fixed colors are intended */
+@theme {
+  --color-iris-gleam: #847dff;
+  --color-cyan-signal: #00b3dd;
+  --color-pale-iris: #d1c9ff;
+  --color-deep-iris: #4b49aa;
+  --color-orchid-bloom: #dd90d8;
+  --color-periwinkle: #90b8f0;
+  --color-obsidian: #0f1011;
+  --color-abyss: #090a0b;
+  --color-graphite: #2e2e2e;
+  --color-steel: #3f4041;
+  --color-silver: #cacaca;
+  --color-fog: #6a6b6b;
+  --color-ash: #9f9fa0;
+  --color-cloud: #f5f5f7;
+  --color-pure: #ffffff;
+  --color-void: #000000;
+
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --text-mono-label: 12px;
+  --text-mono-micro: 10px;
+  --text-body-sm: 14px;
+  --text-body: 16px;
+  --text-subheading: 18px;
+  --text-heading-lg: 38px;
+  --text-display-sm: 80px;
+
+  /* Radius */
+  --radius-input: 8px;
+  --radius-button: 8px;
+  --radius-card: 16px;
+  --radius-tile: 30px;
+
+  /* Motion */
+  --ease-calm: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+/* Baseline */
+html {
+  color-scheme: dark;
+}
+html.light {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-canvas text-body font-sans antialiased;
+  font-feature-settings: 'tnum' 1; /* tabular figures for financial data */
+  transition: background-color 0.2s ease;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--text-heading);
+}
+
+/* Focus visibility — accessibility contract */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Scrollbars, quiet and unobtrusive */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 9999px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Utility voices */
+@utility font-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@utility data-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.016em;
+}
+
+/* Range slider, re-skinned for both themes */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    #847dff 0%,
+    #847dff var(--range-progress, 50%),
+    var(--range-track) var(--range-progress, 50%),
+    var(--range-track) 100%
+  );
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--range-thumb);
+  border: 1px solid var(--lift);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+input[type='range']::-webkit-slider-thumb:hover { transform: scale(1.15); }
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--range-thumb);
+  border: 1px solid var(--lift);
+  cursor: pointer;
+}
+input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--range-track);
+}
+input[type='range']::-moz-range-progress {
+  height: 4px;
+  border-radius: 9999px;
+  background: #847dff;
+}
+
+/* Recharts polish */
+.recharts-cartesian-axis-tick text {
+  fill: var(--chart-tick);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.recharts-tooltip-wrapper { outline: none; }
+
+/* Restrained reveal animation (design: long atmospheric reveals) */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise {
+  animation: rise-in 0.5s var(--ease-calm) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

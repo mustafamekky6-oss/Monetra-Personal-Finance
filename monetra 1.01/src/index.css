@@ -1,0 +1,169 @@
+@import 'tailwindcss';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/dm-serif-display/400.css';
+@import '@fontsource/roboto-mono/400.css';
+@import '@fontsource/roboto-mono/500.css';
+
+@theme {
+  /* Colors — Origin Financial design system */
+  --color-iris-gleam: #847dff;
+  --color-cyan-signal: #00b3dd;
+  --color-pale-iris: #d1c9ff;
+  --color-deep-iris: #4b49aa;
+  --color-orchid-bloom: #dd90d8;
+  --color-periwinkle: #90b8f0;
+  --color-obsidian: #0f1011;
+  --color-abyss: #090a0b;
+  --color-graphite: #2e2e2e;
+  --color-steel: #3f4041;
+  --color-silver: #cacaca;
+  --color-fog: #6a6b6b;
+  --color-ash: #9f9fa0;
+  --color-cloud: #f5f5f7;
+  --color-pure: #ffffff;
+  --color-void: #000000;
+
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --text-mono-label: 12px;
+  --text-mono-micro: 10px;
+  --text-body-sm: 14px;
+  --text-body: 16px;
+  --text-subheading: 18px;
+  --text-heading-lg: 38px;
+  --text-display-sm: 80px;
+
+  /* Radius */
+  --radius-input: 8px;
+  --radius-button: 8px;
+  --radius-card: 16px;
+  --radius-tile: 30px;
+
+  /* Motion */
+  --ease-calm: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+/* Baseline */
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-obsidian text-ash font-sans antialiased;
+  font-feature-settings: 'tnum' 1; /* tabular figures for financial data */
+}
+
+::selection {
+  background: rgba(132, 125, 255, 0.35);
+  color: #fff;
+}
+
+/* Focus visibility — accessibility contract */
+:focus-visible {
+  outline: 2px solid #00b3dd;
+  outline-offset: 2px;
+}
+
+/* Scrollbars, quiet and dark */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3f4041 transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: #3f4041; border-radius: 9999px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Utility voices */
+@utility font-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@utility data-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.016em;
+}
+
+/* Range slider, re-skinned for the dark gallery */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    #847dff 0%,
+    #847dff var(--range-progress, 50%),
+    #3f4041 var(--range-progress, 50%),
+    #3f4041 100%
+  );
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #f5f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+input[type='range']::-webkit-slider-thumb:hover { transform: scale(1.15); }
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #f5f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: #3f4041;
+}
+input[type='range']::-moz-range-progress {
+  height: 4px;
+  border-radius: 9999px;
+  background: #847dff;
+}
+
+/* Recharts polish */
+.recharts-cartesian-axis-tick text {
+  fill: #6a6b6b;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.recharts-tooltip-wrapper { outline: none; }
+
+/* Restrained reveal animation (design: long atmospheric reveals) */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise {
+  animation: rise-in 0.5s var(--ease-calm) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

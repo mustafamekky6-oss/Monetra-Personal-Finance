@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Monetra mark">
+  <!-- Monetra: an ascending M carved from a single quiet line -->
+  <circle cx="32" cy="32" r="29" stroke="#ffffff" stroke-opacity="0.14" stroke-width="1.5"/>
+  <path d="M16 42 L24 27 L32 37 L41 21" stroke="#847dff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="47" cy="18" r="4" fill="#00b3dd"/>
+</svg>
